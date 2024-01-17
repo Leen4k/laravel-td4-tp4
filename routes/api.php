@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\TasksController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\AuthController;
 
 
 /*
@@ -27,4 +28,12 @@ Route::apiResource('categories',CategoryController::class)->except([
 Route::apiResource('products',ProductController::class)->except([
     'create', 'show', 'edit',
 ]);
+
+Route::apiResource('users',UserController::class)->except([
+    'create', 'show', 'edit'
+]);
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/verify-otp', [AuthController::class, 'verifyOTP']);
 
