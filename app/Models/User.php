@@ -25,6 +25,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'name', 'email', 'password',
     ];
 
+    // this function is use to check if the user is admin or not
+    public function isAdmin() {
+        return $this->role === "admin";
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
