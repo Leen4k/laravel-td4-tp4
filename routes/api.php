@@ -21,6 +21,16 @@ use App\Http\Controllers\Api\AuthController;
 */
 
 
+
+/**
+ * 
+ * @OA\Get(
+ *     path="/api/categories",
+ *     @OA\Response(response="200", description="Categories")
+ * )
+ */
+
+
 // Define routes for reading data (GET requests)
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/users', [UserController::class, 'index']);

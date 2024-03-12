@@ -12,6 +12,28 @@ use Laravel\Passport\Passport;
 
 class AuthController extends Controller
 {
+    /**
+     * Register a new user.
+     * 
+     * @OA\Post(
+     *     path="/api/register",
+     *     tags={"Authentication"},
+     *     summary="Register a new user",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name", "email", "password"},
+     *             @OA\Property(property="name", type="string"),
+     *             @OA\Property(property="email", type="string", format="email"),
+     *             @OA\Property(property="password", type="string", format="password")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Registration successful"
+     *     )
+     * )
+     */
     public function register(Request $request)
     {
 
@@ -44,6 +66,39 @@ class AuthController extends Controller
             'message' => 'Registration successful! Please check your email for the verification code.',
         ]);
     }
+
+
+    /**
+     * Verify the OTP for user registration.
+     * 
+     * @OA\Get(
+     *     path="/api/verify-otp",
+     *     tags={"Authentication"},
+     *     summary="Verify OTP for user registration",
+     *     @OA\Parameter(
+     *         name="user_id",
+     *         in="query",
+     *         required=true,
+     *         description="User ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="code",
+     *         in="query",
+     *         required=true,
+     *         description="OTP code",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OTP verification successful"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="User not found or invalid link"
+     *     )
+     * )
+     */
 
     public function verifyOTP(Request $request)
     {
@@ -89,8 +144,31 @@ class AuthController extends Controller
         }
     }
 
-
-
+    /**
+     * Login a user.
+     * 
+     * @OA\Post(
+     *     path="/api/login",
+     *     tags={"Authentication"},
+     *     summary="Login a user",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"email", "password"},
+     *             @OA\Property(property="email", type="string", format="email"),
+     *             @OA\Property(property="password", type="string", format="password")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Login successful"
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Invalid email or password"
+     *     )
+     * )
+     */
     public function login(Request $request)
     {
         // Validate user input
