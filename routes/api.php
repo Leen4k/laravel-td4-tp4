@@ -52,10 +52,14 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::put('/users/{user}', [UserController::class, 'update']);
     Route::delete('/users/{user}', [UserController::class, 'destroy']);
 
-    Route::post('/products', [ProductController::class, 'store']);
-    Route::put('/products/{product}', [ProductController::class, 'update']);
-    Route::delete('/products/{product}', [ProductController::class, 'destroy']);
+    // Route::post('/products', [ProductController::class, 'store']);
+    // Route::put('/products/{product}', [ProductController::class, 'update']);
+    // Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 });
+
+Route::post('/products', [ProductController::class, 'store']);
+Route::put('/products/{product}', [ProductController::class, 'update']);
+Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 
 
 // Route::apiResource('categories',CategoryController::class)->except([
